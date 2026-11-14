@@ -1,9 +1,6 @@
 // Отзывы — только реальные. Тексты не переписываются и не переводятся: как оставили пациенты.
 
 // Видеоотзывы из Instagram @thedent_shymkent. Обложки — превью самих видео, клик ведёт в Instagram.
-// Когда клиника пришлёт прямые ссылки на reels, заменить href у каждого отзыва.
-import { site } from "./site";
-
 export type VideoReview = {
   doctor: string;
   cover: string;
@@ -12,10 +9,10 @@ export type VideoReview = {
 };
 
 export const videoReviews: VideoReview[] = [
-  { doctor: "Данияр Оралбайұлы", cover: "/images/reviews/review-1.jpg", coverAlt: "Обложка видеоотзыва пациента о враче Данияре Оралбайұлы", href: site.instagramReviews },
-  { doctor: "Еламан Амантайұлы", cover: "/images/reviews/review-2.jpg", coverAlt: "Обложка видеоотзыва пациентки о враче Еламане Амантайұлы", href: site.instagramReviews },
-  { doctor: "Еламан Амантайұлы", cover: "/images/reviews/review-3.jpg", coverAlt: "Обложка видеоотзыва пациентки о враче Еламане Амантайұлы", href: site.instagramReviews },
-  { doctor: "Данияр Оралбайұлы", cover: "/images/reviews/review-4.jpg", coverAlt: "Обложка видеоотзыва пациентки о враче Данияре Оралбайұлы", href: site.instagramReviews },
+  { doctor: "Данияр Оралбайұлы", cover: "/images/reviews/review-1.jpg", coverAlt: "Обложка видеоотзыва пациента о враче Данияре Оралбайұлы", href: "https://www.instagram.com/reel/DdvgQIOR7FD/" },
+  { doctor: "Еламан Амантайұлы", cover: "/images/reviews/review-2.jpg", coverAlt: "Обложка видеоотзыва пациентки о враче Еламане Амантайұлы", href: "https://www.instagram.com/reel/DcS3moNRL9t/" },
+  { doctor: "Еламан Амантайұлы", cover: "/images/reviews/review-3.jpg", coverAlt: "Обложка видеоотзыва пациентки о враче Еламане Амантайұлы", href: "https://www.instagram.com/reel/DcA0Zlqtgd-/" },
+  { doctor: "Данияр Оралбайұлы", cover: "/images/reviews/review-4.jpg", coverAlt: "Обложка видеоотзыва пациентки о враче Данияре Оралбайұлы", href: "https://www.instagram.com/reel/DclMUUZN6-6/" },
 ];
 
 // Письменные отзывы из 2ГИС (выгрузка 13.11.2026), без правок.

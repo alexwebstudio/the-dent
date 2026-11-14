@@ -64,7 +64,6 @@ Self-hosted, лежат в `public/fonts`, подключены через `@fon
 - Специализации и стаж врачей (`src/content/doctors.ts`, `roleConfirmed`)
 - Прайс (`src/content/prices.ts` — пока «после осмотра»)
 - Часы работы, реквизиты, лицензия, домен (`src/content/site.ts`)
-- Прямые ссылки на 4 видеоотзыва (`src/content/reviews.ts`, поле `href`)
 - Реальные вопросы-ответы из Instagram (`src/content/faq.ts` — сейчас заглушка)
 
 Когда всё подтверждено — `isDemo: false` в `site.ts`, пометки «уточняется» исчезнут.
