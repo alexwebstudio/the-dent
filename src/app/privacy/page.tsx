@@ -35,7 +35,7 @@ export default function PrivacyPage() {
     <section data-tone="surface" className="section-card page-top">
       <Breadcrumbs items={[{ name: "Политика конфиденциальности", path: "/privacy" }]} />
       <div className="mt-8 max-w-[860px]">
-        <AnimatedTitle as="h1" text="Политика *конфиденциальности*" />
+        <AnimatedTitle as="h1" text="Политика *конфиденциальности*" className="max-sm:!text-[44px]" />
         <DemoNote className="mt-5">Текст-заготовка: перед запуском его должен согласовать юрист клиники.</DemoNote>
         <div className="mt-10">
           {sections.map((section) => (
