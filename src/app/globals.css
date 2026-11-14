@@ -1,0 +1,1385 @@
+@import "tailwindcss";
+
+/* ---------- Шрифты: self-hosted, вариативные, с кириллицей ---------- */
+
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/playfair-display-cyrillic-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/playfair-display-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Заголовки — Pribylskaia, как в прототипе ЭМАЛЬ (только капс). */
+@font-face {
+  font-family: "Pribylskaia";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Pribylskaia.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-cyrillic-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-cyrillic-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Глубокий тёмно-синий The Dent. Белый текст на navy: контраст 14:1 и выше. */
+  --bg: #f3f6fa;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --ink: #0e1726;
+  --ink-muted: #556173;
+  --accent: #15294a;
+  --accent-press: #1e3a66;
+  /* Акцентное слово в заголовке: тот же navy, на тон светлее, чтобы читалось рядом с текстом. */
+  --accent-word: #24467e;
+  --navy-deep: #0c1a30;
+  --tint: #e6ecf5;
+  --line: #dbe2eb;
+  --on-accent: #ffffff;
+  --on-accent-muted: #c8d3e5;
+  --accent-soft: #a9bfe3;
+  /* Тёмные секции: самый глубокий синий. */
+  --bright: linear-gradient(135deg, #0c1a30 0%, #10213e 55%, #15294a 100%);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-soft: 0 10px 40px rgb(12 26 48 / 0.07);
+  --shadow-lift: 0 24px 70px rgb(12 26 48 / 0.35);
+
+  /* Боковое поле контента: фон секции идёт до края экрана, контент держит 1560px. */
+  --gutter: 20px;
+  --inline: max(var(--gutter), calc((100% - 1560px) / 2));
+  /* Пауза первого экрана: контент появляется, когда уходит прелоадер. */
+  --intro: 2.2s;
+  /* Высота плавающей панели навигации с отступом сверху. */
+  --header-space: 92px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 40px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 56px;
+  }
+}
+@media (min-width: 1440px) {
+  :root {
+    --gutter: 72px;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-press: var(--accent-press);
+  --color-tint: var(--tint);
+  --color-line: var(--line);
+  --color-on-accent: var(--on-accent);
+  --color-on-accent-muted: var(--on-accent-muted);
+
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Pribylskaia", "Arial Narrow", Impact, sans-serif;
+  /* Серифный вордмарк логотипа и крупные цифры рейтинга. */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  /* Цифры и служебные подписи: тот же Manrope с моноширинными цифрами. */
+  --font-mono: "Manrope", system-ui, sans-serif;
+
+  --radius-card: 22px;
+}
+
+/* ---------- База ---------- */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--surface);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 110;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Слой нужен, чтобы утилиты Tailwind (hidden, flex, absolute) перекрывали эти классы. */
+@layer components {
+  /* ---------- Прелоадер: знак The Dent прорисовывается, затем проявляется вордмарк ---------- */
+
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    background: var(--surface);
+    color: var(--accent);
+    animation: preloader-out 0.9s cubic-bezier(0.76, 0, 0.24, 1) 2.15s forwards;
+  }
+  .preloader-logo {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.4vw, 22px);
+  }
+  .preloader-mark {
+    width: clamp(76px, 18vw, 112px);
+    height: auto;
+    overflow: visible;
+  }
+  /* Контуры рисуются через pathLength="1". */
+  .preloader-mark .pm-frame,
+  .preloader-mark .pm-tooth {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .preloader-mark .pm-frame {
+    animation: draw 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  .preloader-mark .pm-fill {
+    opacity: 0;
+    transform: scale(0.86);
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    animation: pm-fill 0.6s var(--ease-out) 1.05s forwards;
+  }
+  /* После заливки зуб из navy-контура становится белым силуэтом. */
+  .preloader-mark .pm-tooth {
+    fill: transparent;
+    stroke: currentColor;
+    animation:
+      draw 1s cubic-bezier(0.65, 0, 0.35, 1) 0.35s forwards,
+      pm-tooth 0.5s ease-out 1.25s forwards;
+  }
+  .preloader-bar {
+    width: 2px;
+    align-self: stretch;
+    background: currentColor;
+    transform: scaleY(0);
+    animation: pm-bar 0.5s var(--ease-out) 1.15s forwards;
+  }
+  .preloader-word {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-serif);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: pm-word 0.8s var(--ease-out) 1.3s forwards;
+  }
+  .preloader-word span:first-child {
+    font-size: clamp(26px, 6.4vw, 40px);
+  }
+  .preloader-word span:last-child {
+    font-size: clamp(44px, 11vw, 70px);
+  }
+  .preloader-line {
+    position: relative;
+    width: min(200px, 52vw);
+    height: 1px;
+    overflow: hidden;
+    background: var(--line);
+  }
+  .preloader-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: pm-line 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes pm-fill {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pm-tooth {
+    to {
+      fill: #fff;
+      stroke: #fff;
+    }
+  }
+  @keyframes pm-bar {
+    to {
+      transform: none;
+    }
+  }
+  @keyframes pm-word {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pm-line {
+    to {
+      transform: none;
+    }
+  }
+  /* Раскрытие сайта: экран уходит вверх и растворяется. */
+  @keyframes preloader-out {
+    to {
+      opacity: 0;
+      transform: translateY(-6%);
+      visibility: hidden;
+    }
+  }
+
+  /* ---------- Типографика ---------- */
+
+  /* Все заголовки — Pribylskaia целиком (как в ЭМАЛЬ), акцент только цветом. */
+  .t-h1,
+  .t-h2,
+  .t-stat,
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.012em;
+    line-height: 0.98;
+  }
+  /* Шкала чуть крупнее обычной: Pribylskaia узкая, на 76px она читается как 50px. */
+  .t-h1 {
+    font-size: clamp(46px, 6.5vw, 104px);
+  }
+  .t-h2 {
+    font-size: clamp(36px, 5.2vw, 80px);
+  }
+  .t-stat {
+    font-size: clamp(48px, 7vw, 100px);
+  }
+  .t-h3 {
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+  }
+  .t-lead {
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.5;
+  }
+  .t-eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .t-mono {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+  .on-accent .t-eyebrow {
+    color: var(--on-accent-muted);
+  }
+
+  .prose-clinic p + p {
+    margin-top: 1em;
+  }
+
+  /* Акцент в заголовке: только цвет на одном слове, тем же шрифтом. */
+  .accent-word {
+    color: var(--accent-word);
+  }
+  .on-accent .accent-word {
+    color: var(--accent-soft);
+  }
+
+  /* ---------- AW Blur Reveal: заголовки появляются по буквам ---------- */
+
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .char {
+    display: inline-block;
+  }
+  [data-split] .char {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(8px);
+  }
+  /* h1 на первом экране: та же механика на чистом CSS, текст не ждёт загрузки JS. */
+  .char-css {
+    animation: char-in 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--intro) + var(--i) * 22ms);
+  }
+  .fade-css {
+    animation: fade-up 0.8s var(--ease-out) both;
+    animation-delay: calc(var(--intro) + var(--d, 0s));
+  }
+  .swap-in {
+    animation: fade-up 0.5s var(--ease-out) both;
+  }
+  @keyframes char-in {
+    from {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(8px);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  /* ---------- Появления (стартовые состояния, GSAP доводит .to) ---------- */
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  [data-reveal][data-blur] {
+    filter: blur(8px);
+  }
+  /* AW Blur In: карточки проявляются из размытия. */
+  [data-reveal-group] > [data-reveal-item] {
+    opacity: 0;
+    filter: blur(16px);
+    transform: scale(1.05);
+  }
+
+  /* ---------- Страница: секции во всю ширину, встык ---------- */
+
+  .page-fade {
+    --intro: 0s;
+    animation: page-fade 0.3s ease-out both;
+  }
+  @keyframes page-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  .section-card {
+    position: relative;
+    padding: 56px var(--inline);
+    isolation: isolate;
+  }
+  .section-card[data-tone="surface"] {
+    background: var(--surface);
+  }
+  .section-card[data-tone="surface-2"] {
+    background: var(--surface-2);
+  }
+  .section-card[data-tone="accent"] {
+    background: var(--bright);
+    color: var(--on-accent);
+  }
+  .section-card[data-clip="true"] {
+    overflow: hidden;
+  }
+  .section-card[data-tone="surface"] + .section-card[data-tone="surface"],
+  .section-card[data-tone="surface-2"] + .section-card[data-tone="surface-2"] {
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 768px) {
+    .section-card {
+      padding-block: 72px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-card {
+      padding-block: 96px;
+    }
+  }
+
+  .inner-card {
+    border-radius: 18px;
+    background: var(--surface-2);
+  }
+  @media (min-width: 1024px) {
+    .inner-card {
+      border-radius: 22px;
+    }
+  }
+
+  /* ---------- Кнопки ---------- */
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 26px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 0.25s,
+      color 0.25s,
+      border-color 0.25s,
+      transform 0.3s var(--ease-out);
+  }
+  .btn:hover {
+    transform: scale(1.02);
+  }
+  .btn[data-variant="primary"] {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn[data-variant="primary"]:hover {
+    background: var(--accent-press);
+  }
+  .btn[data-variant="secondary"] {
+    border-color: var(--line);
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn[data-variant="secondary"]:hover {
+    background: var(--surface-2);
+  }
+  .btn[data-variant="light"] {
+    background: #fff;
+    color: var(--ink);
+  }
+  .btn[data-variant="light"]:hover {
+    background: var(--accent-soft);
+  }
+  .btn[data-variant="outline-light"] {
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+  }
+  .btn[data-variant="outline-light"]:hover {
+    background: rgb(255 255 255 / 0.22);
+  }
+  .btn > svg {
+    transition: transform 0.4s var(--ease-out);
+  }
+  .btn:hover > svg {
+    transform: translateX(3px);
+  }
+
+  .arrow-btn {
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.35s ease;
+  }
+  .arrow-btn[data-tone="accent"] {
+    background: var(--accent);
+    color: #fff;
+  }
+  .arrow-btn[data-tone="ghost"] {
+    background: var(--surface-2);
+  }
+  /* Заливка слева направо: слой под стрелкой уходит так же плавно обратно. */
+  .arrow-btn[data-tone="fill"] {
+    background: var(--surface-2);
+  }
+  .arrow-btn[data-tone="fill"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s ease;
+  }
+  .arrow-btn[data-tone="fill"]:hover {
+    color: #fff;
+  }
+  .arrow-btn[data-tone="fill"]:hover::before {
+    transform: scaleX(1);
+  }
+  .arrow-btn svg {
+    transition: transform 0.5s var(--ease-out);
+  }
+  a:hover > .arrow-btn svg,
+  .group:hover .arrow-btn svg {
+    transform: rotate(45deg);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent-press);
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.4s var(--ease-out);
+    padding-bottom: 2px;
+  }
+  .text-link:hover {
+    background-size: 100% 1px;
+  }
+  .on-accent .text-link {
+    color: #fff;
+  }
+
+  /* ---------- Фото-карточки ---------- */
+
+  .photo-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--surface-2);
+    isolation: isolate;
+  }
+  @media (min-width: 1024px) {
+    .photo-card {
+      border-radius: 22px;
+    }
+  }
+  .photo-card img {
+    transition: transform 0.6s var(--ease-out);
+  }
+  .photo-card:hover img,
+  a:hover .photo-card img {
+    transform: scale(1.03);
+  }
+
+  .hero-shade::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(12 26 48 / 0.92) 0%, rgb(16 33 62 / 0.7) 46%, rgb(21 41 74 / 0.15) 100%);
+  }
+
+  .card-shade::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgb(12 26 48 / 0.12) 0%, rgb(12 26 48 / 0) 34%, rgb(12 26 48 / 0.86) 100%);
+  }
+
+  /* ---------- Логотип ---------- */
+
+  .brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-lockup-mark {
+    width: 40px;
+    height: 40px;
+    flex: none;
+  }
+  .brand-lockup-bar {
+    width: 2px;
+    height: 38px;
+    background: currentColor;
+  }
+  .brand-lockup-word {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-serif);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .brand-lockup-word span:first-child {
+    font-size: 14px;
+  }
+  .brand-lockup-word span:last-child {
+    font-size: 25px;
+  }
+
+  /* ---------- Рейтинг 2ГИС ---------- */
+
+  .rating-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.4s var(--ease-out);
+  }
+  .rating-card:hover {
+    border-color: #c3cede;
+    box-shadow: var(--shadow-soft);
+  }
+  .rating-score {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(56px, 15vw, 76px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+  @media (min-width: 1024px) {
+    .rating-card {
+      padding: 22px 26px;
+      border-radius: 22px;
+    }
+  }
+
+  /* ---------- Хедер ---------- */
+
+.site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px 0;
+    pointer-events: none;
+  }
+  .header-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    max-width: 1560px;
+    height: 72px;
+    padding: 0 12px 0 22px;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.58);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    box-shadow: 0 8px 32px rgb(17 24 39 / 0.08);
+    pointer-events: auto;
+    transition:
+      max-width 0.5s var(--ease-out),
+      height 0.5s var(--ease-out),
+      background-color 0.3s,
+      box-shadow 0.3s;
+  }
+  /* При скролле панель сжимается в компактную капсулу. */
+  .header-shell[data-scrolled="true"] {
+    max-width: 1040px;
+    height: 64px;
+    background: rgb(255 255 255 / 0.72);
+    box-shadow: 0 12px 40px rgb(17 24 39 / 0.12);
+  }
+  .header-shell[data-open="true"] {
+    background: rgb(255 255 255 / 0.72);
+    box-shadow: none;
+  }
+
+  .page-top {
+    padding-top: calc(var(--header-space) + 28px);
+  }
+  @media (min-width: 1024px) {
+    .page-top {
+      padding-top: calc(var(--header-space) + 44px);
+    }
+  }
+
+  .burger {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex: none;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: inset 0 0 0 1.5px var(--accent);
+    transition: background-color 0.25s;
+  }
+  .burger:hover {
+    background: var(--tint);
+  }
+  .burger span {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    height: 1.5px;
+    background: var(--accent);
+    transition:
+      transform 0.35s var(--ease-out),
+      top 0.35s var(--ease-out);
+  }
+  .burger span:first-child {
+    top: 20px;
+  }
+  .burger span:last-child {
+    top: 27px;
+  }
+  .burger[aria-expanded="true"] span:first-child {
+    top: 23px;
+    transform: rotate(45deg);
+  }
+  .burger[aria-expanded="true"] span:last-child {
+    top: 23px;
+    transform: rotate(-45deg);
+  }
+
+  .menu-overlay {
+    background: rgb(255 255 255 / 0.74);
+    -webkit-backdrop-filter: blur(28px) saturate(1.5);
+    backdrop-filter: blur(28px) saturate(1.5);
+    animation: overlay-fade 0.28s ease-out both;
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .menu-overlay {
+      background: var(--surface);
+    }
+  }
+  @keyframes overlay-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  .menu-overlay [data-stagger] {
+    animation: overlay-item 0.6s var(--ease-out) both;
+    animation-delay: calc(var(--i) * 55ms + 80ms);
+  }
+  @keyframes overlay-item {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+  .menu-link {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(46px, 7.4vw, 104px);
+    line-height: 1.06;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .menu-link:hover,
+  .menu-link[aria-current="page"] {
+    color: var(--accent-word);
+  }
+
+  /* ---------- Модалка ---------- */
+
+  .modal-panel {
+    animation: modal-in 0.28s var(--ease-out) both;
+  }
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  /* ---------- 3D-зуб ---------- */
+
+  .tooth-halo {
+    position: absolute;
+    inset: 4% 2% -8%;
+    z-index: -1;
+    border-radius: 999px;
+    background: radial-gradient(closest-side, rgb(21 41 74 / 0.18), rgb(120 150 200 / 0.14) 52%, transparent 100%);
+    filter: blur(10px);
+  }
+
+  .rings {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(120vw, 1100px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    pointer-events: none;
+    border-radius: 999px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' fill='none' stroke='%23D8E0E5'%3E%3Ccircle cx='500' cy='500' r='190'/%3E%3Ccircle cx='500' cy='500' r='300'/%3E%3Ccircle cx='500' cy='500' r='410'/%3E%3Ccircle cx='500' cy='500' r='499'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+  }
+
+  /* ---------- Шторка до/после ---------- */
+
+  .ba {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
+    background: var(--surface-2);
+    box-shadow: var(--shadow-soft);
+    touch-action: pan-y;
+    user-select: none;
+    cursor: ew-resize;
+  }
+  @media (min-width: 1024px) {
+    .ba {
+      border-radius: 22px;
+    }
+  }
+  .ba img {
+    pointer-events: none;
+  }
+  .ba-after {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 0 var(--pos, 50%));
+  }
+  .ba-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos, 50%);
+    width: 1px;
+    background: rgb(255 255 255 / 0.9);
+    box-shadow: 0 0 12px rgb(10 18 40 / 0.35);
+  }
+  .ba-knob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 52px;
+    height: 52px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 10px 28px rgb(10 18 40 / 0.28);
+    transition: transform 0.3s var(--ease-out);
+  }
+  .ba:hover .ba-knob {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  .ba-hint {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 40px);
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgb(17 24 39 / 0.72);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .ba:hover .ba-hint {
+    opacity: 1;
+  }
+  .ba[data-touched="true"] .ba-hint {
+    display: none;
+  }
+
+  /* ---------- Этапы ---------- */
+
+  .step-tab {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    text-align: left;
+    color: var(--ink-muted);
+    transition: color 0.3s;
+  }
+  .step-tab:hover,
+  .step-tab[aria-selected="true"] {
+    color: var(--ink);
+  }
+  .step-tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.5s var(--ease-out);
+  }
+  .step-tab[aria-selected="true"]::after {
+    transform: scaleX(1);
+  }
+
+  .step-progress {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+  .step-progress span {
+    height: 3px;
+    border-radius: 3px;
+    background: rgb(255 255 255 / 0.35);
+    transition: background-color 0.4s;
+  }
+  .step-progress span[data-on="true"] {
+    background: #fff;
+  }
+
+  /* ---------- Аккордеон ---------- */
+
+  .acc-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s var(--ease-out);
+  }
+  .acc-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+  }
+  .acc-panel > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .acc-icon {
+    position: relative;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    transition:
+      transform 0.45s var(--ease-out),
+      background-color 0.3s,
+      border-color 0.3s,
+      color 0.3s;
+  }
+  .acc-icon::before,
+  .acc-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+  .acc-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  [aria-expanded="true"] .acc-icon {
+    transform: rotate(45deg);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* ---------- Формы ---------- */
+
+  .field-input {
+    display: block;
+    width: 100%;
+    height: 56px;
+    padding: 0 18px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 16px;
+    transition:
+      border-color 0.2s,
+      background-color 0.2s;
+  }
+  .field-input::placeholder {
+    color: var(--ink-muted);
+  }
+  .field-input:hover {
+    border-color: #b9c3d1;
+  }
+  .field-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: #c9412f;
+  }
+  select.field-input {
+    appearance: none;
+    padding-right: 44px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235A6475' stroke-width='1.5'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+  }
+  .field-error {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #b4331f;
+  }
+
+  /* ---------- Таблицы цен ---------- */
+
+  .hair-row {
+    border-top: 1px solid var(--line);
+  }
+  .hair-row:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* ---------- Подвал ---------- */
+
+  /* Вордмарк в подвале: знак + «THE DENT» по центру, целиком на любой ширине. */
+  .footer-wordmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.22em;
+    font-family: var(--font-serif);
+    font-weight: 800;
+    font-size: min(12.5vw, 220px);
+    line-height: 0.9;
+    padding-bottom: 0.12em;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--accent);
+    user-select: none;
+  }
+  .footer-wordmark svg {
+    width: 0.86em;
+    height: 0.86em;
+    flex: none;
+  }
+
+  /* ---------- Прочее ---------- */
+
+  .dash-card {
+    border: 1px dashed #b7c3d4;
+  }
+}
+
+@layer components {
+  /* ---------- Отзывы: якорь доверия + видеоотзывы в стиле Instagram (концепция ortodent) ---------- */
+
+  .trust-strip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 14px 18px;
+    padding: 20px;
+    border-radius: 18px;
+    background: var(--bright);
+    color: #fff;
+    box-shadow: var(--shadow-lift);
+  }
+  .trust-score {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(64px, 18vw, 112px);
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+  }
+  .trust-link {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .trust-strip {
+      grid-template-columns: auto 1fr auto;
+      gap: 28px;
+      padding: 26px 32px;
+      border-radius: 22px;
+    }
+    .trust-link {
+      grid-column: auto;
+      width: auto;
+    }
+  }
+
+  /* Мобильные: лента со свайпом, как в Instagram. С 1024px — четыре в ряд. */
+  .reels-row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(70vw, 300px);
+    gap: 12px;
+    margin-inline: calc(var(--inline) * -1);
+    padding-inline: var(--inline);
+    padding-bottom: 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--inline);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reels-row::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .reels-row {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-inline: 0;
+      padding-inline: 0;
+      overflow: visible;
+    }
+  }
+
+  .reel-card {
+    display: block;
+    scroll-snap-align: start;
+  }
+  /* Обложки — превью из Instagram (3:4) с надписями: поверх кадра только аккаунт и кнопка play. */
+  .reel {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 22px;
+    background: var(--navy-deep);
+    color: #fff;
+    isolation: isolate;
+    box-shadow: 0 18px 50px rgb(12 26 48 / 0.18);
+    transition:
+      transform 0.5s var(--ease-out),
+      box-shadow 0.5s var(--ease-out);
+  }
+  .reel-card:hover .reel {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 70px rgb(12 26 48 / 0.3);
+  }
+  .reel-cover {
+    object-fit: cover;
+    z-index: -2;
+    transition: transform 0.8s var(--ease-out);
+  }
+  .reel-card:hover .reel-cover {
+    transform: scale(1.05);
+  }
+  .reel-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.4) 0%, rgb(0 0 0 / 0) 24%);
+  }
+  .reel-top {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 1px 6px rgb(0 0 0 / 0.5);
+  }
+  .reel-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: #fff;
+    /* Кольцо «сторис» в фирменном navy. */
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 3.5px var(--accent);
+  }
+  .reel-play {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    padding-left: 4px;
+    border-radius: 999px;
+    background: rgb(12 26 48 / 0.82);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 30px rgb(12 26 48 / 0.45);
+    transition:
+      transform 0.4s var(--ease-out),
+      background-color 0.3s;
+  }
+  .reel-play::before {
+    content: "";
+    position: absolute;
+    inset: -9px;
+    border-radius: inherit;
+    border: 2px solid rgb(255 255 255 / 0.75);
+    animation: reel-pulse 2.2s var(--ease-out) infinite;
+  }
+  .reel-card:hover .reel-play {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--accent-press);
+  }
+  @keyframes reel-pulse {
+    from {
+      opacity: 1;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.35);
+    }
+  }
+
+  .ig-btn {
+    white-space: normal;
+  }
+}
+
+/* Без движения и без JS контент виден сразу. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal],
+  [data-reveal][data-blur],
+  [data-reveal-group] > [data-reveal-item],
+  [data-split] .char {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  .char-css,
+  .fade-css,
+  .page-fade,
+  .reel-play::before {
+    animation: none;
+  }
+  /* Прелоадер: логотип сразу в финальном виде (анимации схлопнуты выше) и быстрый fade. */
+  .preloader {
+    animation: preloader-fade 0.3s ease-out 0.4s forwards !important;
+    animation-duration: 0.3s !important;
+    animation-delay: 0.4s !important;
+  }
+}
+@keyframes preloader-fade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
