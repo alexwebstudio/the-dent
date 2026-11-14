@@ -1,8 +1,6 @@
 import { cta } from "@/content/copy";
-import { site } from "@/content/site";
 import { BookingForm } from "@/components/ui/BookingForm";
 import { AnimatedTitle } from "@/components/ui/Heading";
-import { Instagram, Phone, WhatsApp } from "@/components/ui/Icons";
 import { Mono } from "@/components/ui/Mono";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionCard } from "@/components/ui/SectionCard";
@@ -31,18 +29,6 @@ export function CtaForm({ id = "booking", defaultService, title = cta.title, sub
                 </li>
               ))}
             </ol>
-            <p className="mb-3 mt-7 text-[15px]">{cta.messengersNote}</p>
-            <div className="flex flex-wrap gap-2">
-              <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="btn !min-h-12" data-variant="outline-light">
-                <WhatsApp /> WhatsApp
-              </a>
-              <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="btn !min-h-12" data-variant="outline-light">
-                <Instagram /> Instagram
-              </a>
-              <a href={site.phoneHref} className="btn !min-h-12" data-variant="outline-light">
-                <Phone /> {site.phone}
-              </a>
-            </div>
           </Reveal>
         </div>
 
