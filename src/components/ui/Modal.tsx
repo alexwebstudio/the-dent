@@ -60,11 +60,14 @@ export function Modal({ open, onClose, labelledBy, children, wide }: ModalProps)
         onClick={(event) => event.stopPropagation()}
         className={`modal-panel relative max-h-[calc(100dvh-24px)] w-full ${wide ? "max-w-[880px]" : "max-w-[560px]"} overflow-y-auto rounded-[24px] bg-surface p-6 outline-none lg:rounded-[32px] lg:p-9`}
       >
-        <button type="button" onClick={onClose} aria-label="Закрыть" className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-surface-2">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
-            <path d="M1.5 1.5l11 11M12.5 1.5l-11 11" />
-          </svg>
-        </button>
+        {/* Крестик липкий и поверх контента: на телефоне фото врача занимает всю ширину, а попап прокручивается. */}
+        <div className="sticky top-3 z-20 -mr-2 -mt-2 flex h-0 justify-end lg:-mr-4 lg:-mt-4">
+          <button type="button" onClick={onClose} aria-label="Закрыть" className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-surface shadow-[0_4px_16px_rgb(12_26_48/0.22)] transition-colors hover:bg-tint">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+              <path d="M1.5 1.5l11 11M12.5 1.5l-11 11" />
+            </svg>
+          </button>
+        </div>
         {children}
       </div>
     </div>,
