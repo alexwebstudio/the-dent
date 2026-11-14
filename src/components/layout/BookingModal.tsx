@@ -11,6 +11,8 @@ const TITLE_ID = "booking-title";
 // Любая ссылка с data-booking открывает форму в модалке. Без JS это обычная ссылка на контакты.
 export function BookingModal() {
   const [open, setOpen] = useState(false);
+  // Врач, выбранный в попапе врача; пусто — в форме стоит «Пока не знаю».
+  const [doctor, setDoctor] = useState("");
   const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
@@ -18,6 +20,7 @@ export function BookingModal() {
       const target = event.target as Element | null;
       if (!target?.closest("[data-booking]") || event.metaKey || event.ctrlKey) return;
       event.preventDefault();
+      setDoctor(target.closest<HTMLElement>("[data-booking-doctor]")?.dataset.bookingDoctor ?? "");
       setOpen(true);
     };
     document.addEventListener("click", onClick, true);
@@ -30,7 +33,7 @@ export function BookingModal() {
         {plainText(cta.title)}
       </p>
       <p className="mb-6 text-ink-muted">{cta.subtitle}</p>
-      <BookingForm onSuccess={close} />
+      <BookingForm key={doctor} defaultDoctor={doctor} onSuccess={close} />
     </Modal>
   );
 }

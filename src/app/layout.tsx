@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { BookingModal } from "@/components/layout/BookingModal";
+import { DoctorModal } from "@/components/layout/DoctorModal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { Preloader } from "@/components/layout/Preloader";
+import { Preloader, PreloaderGuard } from "@/components/layout/Preloader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { site } from "@/content/site";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <style>{`[data-reveal],[data-reveal-group]>[data-reveal-item],[data-split] .char{opacity:1;transform:none;filter:none}`}</style>
         </noscript>
         <Preloader />
+        <PreloaderGuard />
         <a href="#main" className="skip-link">
           Перейти к содержимому
         </a>
@@ -56,6 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </main>
           <Footer />
           <BookingModal />
+          <DoctorModal />
         </SmoothScroll>
       </body>
     </html>

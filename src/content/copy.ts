@@ -63,9 +63,7 @@ export const servicesBlock = {
 export const doctorsBlock = {
   eyebrow: "Врачи",
   title: "Наши *врачи* — главный актив клиники",
-  lead: "Пациенты в отзывах благодарят врачей по именам. Откройте карточку, чтобы записаться к своему.",
-  all: "Все врачи",
-  teamPhoto: { src: "/images/clinic/team.jpg", alt: "Команда клиники The Dent в кабинете" },
+  lead: "Пациенты в отзывах благодарят врачей по именам. Нажмите на врача, чтобы узнать подробнее и записаться к нему.",
 };
 
 export const stepsBlock = {
@@ -141,7 +139,7 @@ export const cta = {
 export const footer = {
   nav: [
     { label: "Услуги", href: "/services" },
-    { label: "Врачи", href: "/doctors" },
+    { label: "Врачи", href: "/#doctors" },
     { label: "Отзывы", href: "/#reviews" },
     { label: "Цены", href: "/prices" },
     ...(hasCases ? [{ label: "Работы", href: "/cases" }] : []),

@@ -161,7 +161,7 @@ export default async function ServicePage({ params }: Props) {
             <Reveal className="lg:col-span-4 lg:col-start-9">
               <p className="t-eyebrow mb-4">Ведёт услугу</p>
               <DoctorCard doctor={doctor} sizes="(min-width: 1024px) 30vw, 100vw" />
-              <Link href="/doctors" className="group mt-4 flex items-center justify-between gap-3 font-medium">
+              <Link href="/#doctors" className="group mt-4 flex items-center justify-between gap-3 font-medium">
                 Все врачи клиники <ArrowButton tone="ghost" />
               </Link>
             </Reveal>

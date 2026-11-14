@@ -45,7 +45,7 @@ export default async function CasePage({ params }: Props) {
     { label: "Услуга", value: item.serviceTitle, href: `/services/${item.serviceSlug}` },
     { label: "Срок", value: item.duration },
     { label: "Количество визитов", value: item.visits },
-    { label: "Врач", value: doctor?.role ?? "—", href: doctor ? `/doctors/${doctor.slug}` : undefined },
+    { label: "Врач", value: doctor?.role ?? "—", href: doctor ? "/#doctors" : undefined },
     { label: "Гарантия", value: item.warranty },
   ];
 

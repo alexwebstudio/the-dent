@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { doctors } from "@/content/doctors";
 import { services } from "@/content/services";
 import { formatPhone, leadSchema, type LeadInput } from "@/lib/validation";
 import { Button } from "./Button";
@@ -13,8 +14,9 @@ import { Field, Input, Select } from "./Input";
 type Status = "idle" | "loading" | "error";
 
 const DIAGNOSTICS = "Диагностика и консультация";
+export const NO_DOCTOR = "Пока не знаю";
 
-export function BookingForm({ submitLabel = "Записаться", defaultService = "", onSuccess }: { submitLabel?: string; defaultService?: string; onSuccess?: () => void }) {
+export function BookingForm({ submitLabel = "Записаться", defaultService = "", defaultDoctor = "", onSuccess }: { submitLabel?: string; defaultService?: string; defaultDoctor?: string; onSuccess?: () => void }) {
   const router = useRouter();
   const uid = useId();
   const [status, setStatus] = useState<Status>("idle");
@@ -25,7 +27,7 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
     formState: { errors },
   } = useForm<LeadInput>({
     resolver: zodResolver(leadSchema),
-    defaultValues: { name: "", phone: "", service: defaultService, time: "", consent: false, website: "" },
+    defaultValues: { name: "", phone: "", service: defaultService, doctor: defaultDoctor || NO_DOCTOR, time: "", consent: false, website: "" },
   });
 
   const submit = handleSubmit(async (values) => {
@@ -44,7 +46,7 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
     }
   });
 
-  const ids = { name: `${uid}-name`, phone: `${uid}-phone`, service: `${uid}-service`, time: `${uid}-time`, consent: `${uid}-consent` };
+  const ids = { name: `${uid}-name`, phone: `${uid}-phone`, service: `${uid}-service`, doctor: `${uid}-doctor`, time: `${uid}-time`, consent: `${uid}-consent` };
 
   return (
     <form onSubmit={submit} noValidate className="grid gap-4 sm:grid-cols-2">
@@ -82,6 +84,17 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
           {services.map((service) => (
             <option key={service.slug} value={service.title}>
               {service.title}
+            </option>
+          ))}
+        </Select>
+      </Field>
+
+      <Field label="Врач" id={ids.doctor} error={errors.doctor?.message}>
+        <Select id={ids.doctor} aria-invalid={Boolean(errors.doctor)} aria-describedby={errors.doctor ? `${ids.doctor}-error` : undefined} {...register("doctor")}>
+          <option value={NO_DOCTOR}>{NO_DOCTOR}</option>
+          {doctors.map((doctor) => (
+            <option key={doctor.slug} value={doctor.name}>
+              {doctor.name}
             </option>
           ))}
         </Select>

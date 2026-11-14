@@ -9,9 +9,11 @@ type ModalProps = {
   onClose: () => void;
   labelledBy: string;
   children: ReactNode;
+  /** Широкая панель: попап врача с фото. */
+  wide?: boolean;
 };
 
-export function Modal({ open, onClose, labelledBy, children }: ModalProps) {
+export function Modal({ open, onClose, labelledBy, children, wide }: ModalProps) {
   const panel = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   useLockBody(open);
@@ -56,7 +58,7 @@ export function Modal({ open, onClose, labelledBy, children }: ModalProps) {
         tabIndex={-1}
         data-lenis-prevent=""
         onClick={(event) => event.stopPropagation()}
-        className="modal-panel relative max-h-[calc(100dvh-24px)] w-full max-w-[560px] overflow-y-auto rounded-[24px] bg-surface p-6 outline-none lg:rounded-[32px] lg:p-9"
+        className={`modal-panel relative max-h-[calc(100dvh-24px)] w-full ${wide ? "max-w-[880px]" : "max-w-[560px]"} overflow-y-auto rounded-[24px] bg-surface p-6 outline-none lg:rounded-[32px] lg:p-9`}
       >
         <button type="button" onClick={onClose} aria-label="Закрыть" className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-surface-2">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">

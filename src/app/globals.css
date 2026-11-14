@@ -198,7 +198,13 @@ button {
     gap: 36px;
     background: var(--surface);
     color: var(--accent);
+    /* Декоративный слой: клики всегда проходят сквозь него, даже если анимация в браузере встала. */
+    pointer-events: none;
     animation: preloader-out 0.9s cubic-bezier(0.76, 0, 0.24, 1) 2.15s forwards;
+  }
+  /* Страховка из PreloaderGuard: убираем слой, если CSS-анимация не доиграла. */
+  .preloader[data-done] {
+    display: none;
   }
   .preloader-logo {
     display: flex;

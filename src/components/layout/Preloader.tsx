@@ -22,3 +22,5 @@ export function Preloader() {
     </div>
   );
 }
+
+export { PreloaderGuard } from "./PreloaderGuard";

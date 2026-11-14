@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Doctor } from "@/content/doctors";
 import { site } from "@/content/site";
 import { ArrowButton } from "./ArrowButton";
 
+// Карточка открывает попап с информацией о враче (DoctorModal) — отдельных страниц у врачей нет.
 export function DoctorCard({ doctor, sizes }: { doctor: Doctor; sizes: string }) {
   return (
-    <Link href={`/doctors/${doctor.slug}`} aria-label={`${doctor.name}, ${doctor.specialization.toLowerCase()}`} className="group block">
+    <button type="button" data-doctor={doctor.slug} aria-haspopup="dialog" aria-label={`${doctor.name}: подробнее о враче`} className="group block w-full text-left">
       <span className="photo-card aspect-[3/4]">
         <Image src={doctor.image} alt={doctor.imageAlt} fill sizes={sizes} className="object-cover" style={{ objectPosition: doctor.objectPosition }} />
       </span>
@@ -22,6 +22,6 @@ export function DoctorCard({ doctor, sizes }: { doctor: Doctor; sizes: string })
           <ArrowButton tone="fill" />
         </span>
       </span>
-    </Link>
+    </button>
   );
 }

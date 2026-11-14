@@ -10,6 +10,7 @@ export const leadSchema = z.object({
       return digits.length >= 10 && digits.length <= 15;
     }, "Введите телефон полностью"),
   service: z.string().trim().min(1, "Выберите услугу").max(80),
+  doctor: z.string().trim().min(1, "Выберите врача или «Пока не знаю»").max(80),
   time: z.string().trim().max(80).optional(),
   consent: z.boolean().refine((value) => value, "Нужно согласие на обработку данных"),
   website: z.string().max(0).optional(),
