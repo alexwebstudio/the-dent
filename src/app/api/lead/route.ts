@@ -48,8 +48,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, delivered: false });
   }
 
-  const { name, phone, service, doctor, time } = parsed.data;
-  const text = [`Новая заявка, ${site.brand}`, `Имя: ${name}`, `Телефон: ${phone}`, `Услуга: ${service}`, `Врач: ${doctor}`, `Время: ${time || "не указано"}`].join("\n");
+  const { name, phone, service, doctor, date, time } = parsed.data;
+  const text = [`Новая заявка, ${site.brand}`, `Имя: ${name}`, `Телефон: ${phone}`, `Услуга: ${service}`, `Врач: ${doctor}`, `Дата: ${date || "не указана"}`, `Время: ${time || "не указано"}`].join("\n");
 
   try {
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {

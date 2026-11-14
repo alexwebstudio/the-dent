@@ -11,7 +11,8 @@ export const leadSchema = z.object({
     }, "Введите телефон полностью"),
   service: z.string().trim().min(1, "Выберите услугу").max(80),
   doctor: z.string().trim().min(1, "Выберите врача или «Пока не знаю»").max(80),
-  time: z.string().trim().max(80).optional(),
+  date: z.string().trim().max(60).optional(),
+  time: z.string().trim().max(20).optional(),
   consent: z.boolean().refine((value) => value, "Нужно согласие на обработку данных"),
   website: z.string().max(0).optional(),
 });

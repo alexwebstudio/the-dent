@@ -733,12 +733,13 @@ button {
     border-color: #c3cede;
     box-shadow: var(--shadow-soft);
   }
+  /* Крупные цифры — шрифтом заголовков. */
   .rating-score {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: clamp(56px, 15vw, 76px);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 17vw, 88px);
     line-height: 0.9;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.01em;
     color: var(--accent);
   }
   @media (min-width: 1024px) {
@@ -870,8 +871,9 @@ button {
     position: relative;
     display: inline-block;
     font-family: var(--font-display);
-    font-size: clamp(46px, 7.4vw, 104px);
-    line-height: 1.06;
+    /* На десктопе размер ограничен и высотой экрана: шесть пунктов помещаются на 13" без прокрутки. */
+    font-size: clamp(40px, min(4.6vw, 8vh), 72px);
+    line-height: 1.08;
     text-transform: uppercase;
     transition: color 0.25s;
   }
@@ -1137,6 +1139,49 @@ button {
     color: #b4331f;
   }
 
+  /* ---------- Выбор даты и времени в форме ---------- */
+
+  .picker-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .picker-row::-webkit-scrollbar {
+    display: none;
+  }
+  .picker-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+  .picker-chip:hover {
+    border-color: #b9c3d1;
+  }
+  .picker-chip.is-on {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+  .picker-day {
+    flex: none;
+    flex-direction: column;
+    gap: 2px;
+    width: 76px;
+    height: 60px;
+    scroll-snap-align: start;
+  }
+
   /* ---------- Таблицы цен ---------- */
 
   .hair-row {
@@ -1193,11 +1238,11 @@ button {
     box-shadow: var(--shadow-lift);
   }
   .trust-score {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: clamp(64px, 18vw, 112px);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(76px, 21vw, 128px);
     line-height: 0.88;
-    letter-spacing: -0.035em;
+    letter-spacing: 0.01em;
   }
   .trust-link {
     grid-column: 1 / -1;

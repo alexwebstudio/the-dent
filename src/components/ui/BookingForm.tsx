@@ -9,6 +9,7 @@ import { doctors } from "@/content/doctors";
 import { services } from "@/content/services";
 import { formatPhone, leadSchema, type LeadInput } from "@/lib/validation";
 import { Button } from "./Button";
+import { DateTimePicker } from "./DateTimePicker";
 import { Field, Input, Select } from "./Input";
 
 type Status = "idle" | "loading" | "error";
@@ -27,7 +28,7 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
     formState: { errors },
   } = useForm<LeadInput>({
     resolver: zodResolver(leadSchema),
-    defaultValues: { name: "", phone: "", service: defaultService, doctor: defaultDoctor || NO_DOCTOR, time: "", consent: false, website: "" },
+    defaultValues: { name: "", phone: "", service: defaultService, doctor: defaultDoctor || NO_DOCTOR, date: "", time: "", consent: false, website: "" },
   });
 
   const submit = handleSubmit(async (values) => {
@@ -46,7 +47,7 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
     }
   });
 
-  const ids = { name: `${uid}-name`, phone: `${uid}-phone`, service: `${uid}-service`, doctor: `${uid}-doctor`, time: `${uid}-time`, consent: `${uid}-consent` };
+  const ids = { name: `${uid}-name`, phone: `${uid}-phone`, service: `${uid}-service`, doctor: `${uid}-doctor`, time: `${uid}-time`, date: `${uid}-date`, consent: `${uid}-consent` };
 
   return (
     <form onSubmit={submit} noValidate className="grid gap-4 sm:grid-cols-2">
@@ -100,9 +101,19 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
         </Select>
       </Field>
 
-      <Field label="Удобное время" hint="(необязательно)" id={ids.time}>
-        <Input id={ids.time} placeholder="Например, будни после 18:00" {...register("time")} />
-      </Field>
+      <Controller
+        name="date"
+        control={control}
+        render={({ field: dateField }) => (
+          <Controller
+            name="time"
+            control={control}
+            render={({ field: timeField }) => (
+              <DateTimePicker date={dateField.value ?? ""} time={timeField.value ?? ""} onDate={dateField.onChange} onTime={timeField.onChange} dateLabelId={ids.date} timeLabelId={ids.time} />
+            )}
+          />
+        )}
+      />
 
       {/* Ловушка для ботов: поле скрыто от людей и вспомогательных технологий. */}
       <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
