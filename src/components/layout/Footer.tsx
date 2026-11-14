@@ -18,15 +18,15 @@ export function Footer() {
           <span>The Dent</span>
         </div>
 
-        <div className="grid gap-10 border-t border-line py-10 lg:grid-cols-12 lg:py-12">
+        <div className="grid gap-10 border-t border-line py-10 text-center lg:grid-cols-12 lg:py-12 lg:text-left">
           <div className="lg:col-span-5">
             <p className="font-display text-[32px] uppercase leading-none lg:text-[40px]">{site.slogan}</p>
-            <p className="mt-4 max-w-[40ch] text-ink-muted">{footer.description}</p>
+            <p className="mx-auto mt-4 max-w-[40ch] text-ink-muted lg:mx-0">{footer.description}</p>
           </div>
 
           <nav aria-label="Навигация в подвале" className="lg:col-span-3">
             <p className="t-eyebrow mb-4">Разделы</p>
-            <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 lg:grid-cols-1">
+            <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2.5 lg:grid lg:grid-cols-1 lg:justify-start">
               {footer.nav.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-[16px] transition-colors hover:text-accent-press">
@@ -51,7 +51,7 @@ export function Footer() {
               </p>
               <p className="text-ink-muted">{site.hours}</p>
             </address>
-            <div className="mt-5 flex gap-2">
+            <div className="mt-5 flex justify-center gap-2 lg:justify-start">
               {socials.map(({ href, label, Icon }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-2 transition-colors hover:bg-accent hover:text-white">
                   <Icon />

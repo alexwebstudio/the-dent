@@ -46,7 +46,10 @@ export function useReveal(scope: RefObject<HTMLElement | null>) {
         ScrollTrigger.create({ trigger: el, start: "top bottom", end: "bottom top", onToggle: (self) => tween.paused(!self.isActive) });
       });
 
+      // Параллакс только на широких экранах: на телефоне зуб «уплывал» от своего блока.
+      const wide = window.matchMedia("(min-width: 1280px)").matches;
       root.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+        if (!wide) return;
         gsap.to(el, {
           y: Number(el.dataset.parallax),
           ease: "none",

@@ -108,6 +108,7 @@
   --color-ink-muted: var(--ink-muted);
   --color-accent: var(--accent);
   --color-accent-press: var(--accent-press);
+  --color-accent-word: var(--accent-word);
   --color-tint: var(--tint);
   --color-line: var(--line);
   --color-on-accent: var(--on-accent);

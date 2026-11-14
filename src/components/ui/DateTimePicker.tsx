@@ -37,7 +37,7 @@ export function DateTimePicker({ date, time, onDate, onTime, dateLabelId, timeLa
 
   return (
     <>
-      <div className="sm:col-span-2">
+      <div className="min-w-0 sm:col-span-2">
         <p id={dateLabelId} className="mb-2 text-[14px] font-medium">
           Дата визита <span className="font-normal opacity-65">(необязательно)</span>
         </p>
@@ -55,7 +55,7 @@ export function DateTimePicker({ date, time, onDate, onTime, dateLabelId, timeLa
         </div>
       </div>
 
-      <div className="sm:col-span-2">
+      <div className="min-w-0 sm:col-span-2">
         <p id={timeLabelId} className="mb-2 text-[14px] font-medium">
           Время <span className="font-normal opacity-65">(необязательно)</span>
         </p>

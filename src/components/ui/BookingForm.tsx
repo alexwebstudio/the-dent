@@ -50,7 +50,7 @@ export function BookingForm({ submitLabel = "Записаться", defaultServi
   const ids = { name: `${uid}-name`, phone: `${uid}-phone`, service: `${uid}-service`, doctor: `${uid}-doctor`, time: `${uid}-time`, date: `${uid}-date`, consent: `${uid}-consent` };
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={submit} noValidate className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">
       <Field label="Имя" id={ids.name} error={errors.name?.message}>
         <Input id={ids.name} autoComplete="name" placeholder="Как к вам обращаться" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? `${ids.name}-error` : undefined} {...register("name")} />
       </Field>

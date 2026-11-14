@@ -8,8 +8,8 @@ import { SectionCard } from "@/components/ui/SectionCard";
 export function CtaForm({ id = "booking", defaultService, title = cta.title, submitLabel }: { id?: string; defaultService?: string; title?: string; submitLabel?: string }) {
   return (
     <SectionCard id={id} tone="accent" clip>
-      <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <div className="lg:col-span-5">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="min-w-0 lg:col-span-5">
           <p className="t-eyebrow mb-4">{cta.eyebrow}</p>
           <AnimatedTitle text={title} />
           <Reveal delay={0.15} className="t-lead mt-5 max-w-[42ch]">
@@ -32,7 +32,7 @@ export function CtaForm({ id = "booking", defaultService, title = cta.title, sub
           </Reveal>
         </div>
 
-        <Reveal className="rounded-[22px] bg-surface p-5 text-ink shadow-[var(--shadow-lift)] md:p-8 lg:col-span-7 lg:self-center lg:p-10">
+        <Reveal className="min-w-0 rounded-[22px] bg-surface p-5 text-ink shadow-[var(--shadow-lift)] md:p-8 lg:col-span-7 lg:self-center lg:p-10">
           <BookingForm submitLabel={submitLabel ?? cta.submit} defaultService={defaultService} />
         </Reveal>
       </div>

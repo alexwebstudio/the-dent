@@ -24,47 +24,63 @@ export function StepsTabs() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
-      <div role="tablist" aria-label="Этапы лечения" aria-orientation="vertical" onKeyDown={onKeyDown} className="border-b border-line lg:col-span-5 lg:self-center">
-        {steps.map((item, index) => (
-          <button
-            key={item.number}
-            ref={(node) => {
-              tabs.current[index] = node;
-            }}
-            type="button"
-            role="tab"
-            id={`${baseId}-tab-${index}`}
-            aria-selected={index === active}
-            aria-controls={`${baseId}-panel`}
-            tabIndex={index === active ? 0 : -1}
-            onClick={() => setActive(index)}
-            className="step-tab"
-          >
-            <Mono className="!text-[13px]">{item.number}</Mono>
-            <span className="text-[18px] font-semibold leading-tight lg:text-[20px]">{item.title}</span>
-            <Mono className="hidden !text-[13px] sm:inline">{item.time}</Mono>
-          </button>
+    <>
+      {/* Мобильные и планшет: простой список шагов, который просто листается. */}
+      <ol className="grid gap-3 md:grid-cols-2 lg:hidden">
+        {steps.map((item) => (
+          <li key={item.number} className="relative isolate flex min-h-[340px] flex-col justify-end overflow-hidden rounded-[18px] bg-accent-press p-5 text-white">
+            <Image src={item.image} alt={item.alt} fill sizes="(min-width: 768px) 46vw, 100vw" className="-z-10 object-cover" />
+            <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgb(12_26_48/0.92)] via-[rgb(12_26_48/0.45)] to-[rgb(12_26_48/0.1)]" />
+            <span className="t-display block text-[72px] leading-none">{item.number}</span>
+            <p className="mt-2 text-[22px] font-semibold leading-tight">{item.title}</p>
+            <p className="mt-1.5 text-[16px] leading-snug">{item.text}</p>
+            <Mono className="mt-3 inline-block self-start rounded-full bg-white px-3 py-1 !text-[13px] text-ink">{item.time}</Mono>
+          </li>
         ))}
-      </div>
+      </ol>
 
-      <div id={`${baseId}-panel`} role="tabpanel" aria-labelledby={`${baseId}-tab-${active}`} className="relative isolate flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[18px] bg-accent-press p-5 text-white lg:col-span-7 lg:min-h-[560px] lg:rounded-[22px] lg:p-8">
-        <Image key={step.image} src={step.image} alt={step.alt} fill sizes="(min-width: 1024px) 56vw, 100vw" className="swap-in -z-10 object-cover" />
-        <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgb(12_26_48/0.9)] via-[rgb(12_26_48/0.25)] to-[rgb(12_26_48/0.32)]" />
-
-        <div className="step-progress" aria-hidden="true">
+      <div className="hidden gap-6 lg:grid lg:grid-cols-12 lg:gap-12">
+        <div role="tablist" aria-label="Этапы лечения" aria-orientation="vertical" onKeyDown={onKeyDown} className="border-b border-line lg:col-span-5 lg:self-center">
           {steps.map((item, index) => (
-            <span key={item.number} data-on={index <= active} />
+            <button
+              key={item.number}
+              ref={(node) => {
+                tabs.current[index] = node;
+              }}
+              type="button"
+              role="tab"
+              id={`${baseId}-tab-${index}`}
+              aria-selected={index === active}
+              aria-controls={`${baseId}-panel`}
+              tabIndex={index === active ? 0 : -1}
+              onClick={() => setActive(index)}
+              className="step-tab"
+            >
+              <Mono className="!text-[13px]">{item.number}</Mono>
+              <span className="text-[18px] font-semibold leading-tight lg:text-[20px]">{item.title}</span>
+              <Mono className="hidden !text-[13px] sm:inline">{item.time}</Mono>
+            </button>
           ))}
         </div>
 
-        <div key={step.number} className="swap-in">
-          <span className="t-display block text-[clamp(84px,11vw,168px)] leading-none">{step.number}</span>
-          <p className="mt-3 text-[22px] font-semibold leading-tight lg:text-[28px]">{step.title}</p>
-          <p className="mt-2 max-w-[44ch] text-[17px] leading-snug">{step.text}</p>
-          <Mono className="mt-4 inline-block rounded-full bg-white px-3 py-1 !text-[13px] text-ink">{step.time}</Mono>
+        <div id={`${baseId}-panel`} role="tabpanel" aria-labelledby={`${baseId}-tab-${active}`} className="relative isolate flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[18px] bg-accent-press p-5 text-white lg:col-span-7 lg:min-h-[560px] lg:rounded-[22px] lg:p-8">
+          <Image key={step.image} src={step.image} alt={step.alt} fill sizes="(min-width: 1024px) 56vw, 100vw" className="swap-in -z-10 object-cover" />
+          <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-[rgb(12_26_48/0.9)] via-[rgb(12_26_48/0.25)] to-[rgb(12_26_48/0.32)]" />
+
+          <div className="step-progress" aria-hidden="true">
+            {steps.map((item, index) => (
+              <span key={item.number} data-on={index <= active} />
+            ))}
+          </div>
+
+          <div key={step.number} className="swap-in">
+            <span className="t-display block text-[clamp(84px,11vw,168px)] leading-none">{step.number}</span>
+            <p className="mt-3 text-[22px] font-semibold leading-tight lg:text-[28px]">{step.title}</p>
+            <p className="mt-2 max-w-[44ch] text-[17px] leading-snug">{step.text}</p>
+            <Mono className="mt-4 inline-block rounded-full bg-white px-3 py-1 !text-[13px] text-ink">{step.time}</Mono>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
